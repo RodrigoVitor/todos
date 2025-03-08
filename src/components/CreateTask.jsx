@@ -10,6 +10,15 @@ export default function CreateTask() {
   function handleChange (e) {
     setCategory(e.target.value)
   }
+  function validation () {
+    if(!title || title == '' && !category || category == "") {
+      alert('Preenche todos os campos')
+      return
+    }
+    addTask(title, category)
+    setCategory('')
+    setTile('')
+  }
 
   return (
     <div>
@@ -22,7 +31,7 @@ export default function CreateTask() {
         <option value="Estudo">Estudo</option>
       </select>
       <button
-        onClick={() => addTask(title, category)} 
+        onClick={() => validation()} 
         className="bg-blue-500 mt-4 px-2 rounded-md text-white font-bold text-[18px] cursor-pointer hover:bg-blue-400"
       >
         Adicionar
