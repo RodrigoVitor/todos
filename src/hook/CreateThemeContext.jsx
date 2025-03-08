@@ -4,7 +4,8 @@ import { v4 } from 'uuid'
 // eslint-disable-next-line react-refresh/only-export-components
 export const ThemeContext = createContext({
     todos: [],
-    addTask: () => {}
+    addTask: () => {},
+    clickComplete: () => {}
 
 })
 
@@ -15,14 +16,22 @@ const ThemeContextProvider = ({children}) => {
         const newTodos = {
             id: v4(),
             title: title,
-            category: category
+            category: category,
+            isCompleted: false
         }
-        console.log(newTodos)
         return setTodos([...todos, newTodos])
     }
 
+    const clickComplete = (id) => {
+        setTodos((prevTodos) =>
+          prevTodos.map((todo) =>
+            todo.id === id ? { ...todo, isCompleted: !todo.isCompleted } : todo
+          )
+        );
+    };
+
     return (
-        <ThemeContext.Provider value={{todos, addTask}}>
+        <ThemeContext.Provider value={{todos, addTask, clickComplete}}>
             {children}
         </ThemeContext.Provider>
     )
