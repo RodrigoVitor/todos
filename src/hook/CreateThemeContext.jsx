@@ -4,13 +4,17 @@ import { v4 } from 'uuid'
 // eslint-disable-next-line react-refresh/only-export-components
 export const ThemeContext = createContext({
     todos: [],
+    complete: '',
     addTask: () => {},
-    clickComplete: () => {}
+    clickComplete: () => {},
+    onDelete: () => {},
+    isComplete: () => {}
 
 })
 
 const ThemeContextProvider = ({children}) => {
     const [todos, setTodos] = useState([])
+    const [complete, setComplete] = useState('Todos')
 
     function addTask (title, category) {
         const newTodos = {
@@ -30,8 +34,17 @@ const ThemeContextProvider = ({children}) => {
         );
     };
 
+    function onDelete(id) {
+        const newTodos = todos.filter(todo => todo.id != id)
+        setTodos(newTodos)
+    }
+
+    function isComplete(value) {
+        setComplete(value)
+    }
+
     return (
-        <ThemeContext.Provider value={{todos, addTask, clickComplete}}>
+        <ThemeContext.Provider value={{todos, addTask, clickComplete, onDelete, complete, isComplete}}>
             {children}
         </ThemeContext.Provider>
     )
