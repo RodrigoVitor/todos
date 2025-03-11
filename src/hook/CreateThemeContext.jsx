@@ -24,7 +24,7 @@ const ThemeContextProvider = ({children}) => {
     function addTask (title, category) {
         const newTodos = {
             id: v4(),
-            title: title,
+            title: title.toLowerCase(),
             category: category,
             isCompleted: false
         }
@@ -52,9 +52,12 @@ const ThemeContextProvider = ({children}) => {
     }
 
     function search (value) {
-        const newTodos = todos.filter(todo => todo.title == value)
+        const newTodos = todos.filter(todo => todo.title == value.toLowerCase())
+        if(newTodos.length < 1) {
+            alert('Não encontrado! \nPesquise pelo nome completo da tarefa')
+            return
+        }
         setSearchTodo(newTodos)
-        console.log(searchTodo)
     }
 
     return (
