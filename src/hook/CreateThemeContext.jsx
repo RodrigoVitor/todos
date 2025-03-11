@@ -6,6 +6,7 @@ export const ThemeContext = createContext({
     todos: [],
     complete: '',
     searchTodo: [],
+    inputSearch: '',
     addTask: () => {},
     clickComplete: () => {},
     onDelete: () => {},
@@ -18,6 +19,7 @@ const ThemeContextProvider = ({children}) => {
     const [todos, setTodos] = useState([])
     const [complete, setComplete] = useState('Todos')
     const [searchTodo, setSearchTodo] = useState([])
+    const [inputSearch, setInputSearch] = useState('')
 
     function addTask (title, category) {
         const newTodos = {
@@ -43,6 +45,9 @@ const ThemeContextProvider = ({children}) => {
     }
 
     function isComplete(value) {
+        setSearchTodo([])
+        setInputSearch('')
+
         setComplete(value)
     }
 
@@ -53,7 +58,7 @@ const ThemeContextProvider = ({children}) => {
     }
 
     return (
-        <ThemeContext.Provider value={{searchTodo, todos, addTask, clickComplete, onDelete, complete, isComplete, search, }}>
+        <ThemeContext.Provider value={{ inputSearch, searchTodo, todos, addTask, setInputSearch, clickComplete, onDelete, complete, isComplete, search, }}>
             {children}
         </ThemeContext.Provider>
     )

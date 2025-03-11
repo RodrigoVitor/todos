@@ -6,8 +6,8 @@ import Tasks from "./components/Tasks";
 import { ThemeContext } from "./hook/CreateThemeContext";
 
 export default function App () {
-  const {todos, search} = useContext(ThemeContext)
-  const [inputSearch, setInputSearch] = useState('')
+  const {todos, search, inputSearch, setInputSearch} = useContext(ThemeContext)
+  // const [] = useState('')
   return (
     <div className="bg-[url('./assets/bg.jpeg')] min-h-175 bg-no-repeat bg-cover py-12">
       <div className="bg-gray-100 w-[50%] mx-auto rounded-md p-4">
