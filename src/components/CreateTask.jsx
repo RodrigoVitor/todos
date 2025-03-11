@@ -1,11 +1,11 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import InputComponent from "./InputComponent";
 import { ThemeContext } from "../hook/CreateThemeContext";
 
 export default function CreateTask() {
   const [title, setTile] = useState('')
   const [category, setCategory] = useState('')
-  const {addTask} = useContext(ThemeContext)
+  const {addTask,todos} = useContext(ThemeContext)
 
   function handleChange (e) {
     setCategory(e.target.value)
@@ -19,6 +19,10 @@ export default function CreateTask() {
     setCategory('')
     setTile('')
   }
+
+  useEffect(() => {
+    localStorage.setItem('todos', JSON.stringify(todos))
+  }, [todos])
 
   return (
     <div>

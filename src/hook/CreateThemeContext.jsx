@@ -16,11 +16,17 @@ export const ThemeContext = createContext({
 })
 
 const ThemeContextProvider = ({children}) => {
-    const [todos, setTodos] = useState([])
     const [complete, setComplete] = useState('Todos')
     const [searchTodo, setSearchTodo] = useState([])
     const [inputSearch, setInputSearch] = useState('')
-
+    const [todos, setTodos] = useState(() => {
+        const storedTodos = localStorage.getItem("todos");
+        if (storedTodos) {
+            return JSON.parse(storedTodos);
+        }
+        return []
+    })
+    
     function addTask (title, category) {
         const newTodos = {
             id: v4(),
@@ -28,7 +34,8 @@ const ThemeContextProvider = ({children}) => {
             category: category,
             isCompleted: false
         }
-        return setTodos([...todos, newTodos])
+        setTodos([...todos, newTodos])
+        
     }
 
     const clickComplete = (id) => {
